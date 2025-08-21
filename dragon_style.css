@@ -1,8 +1,5 @@
-/* interactive_dragon.css MODIFICADO */
 
-/* Removemos as regras para 'body' e 'html' para não bagunçar seu site */
-
-#dragon-canvas { /* Trocamos 'svg' por um ID para sermos mais específicos */
+#dragon-canvas { 
     position: fixed; /* Fica fixo na tela, mesmo com rolagem */
     top: 0;
     left: 0;
