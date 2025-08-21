@@ -235,3 +235,13 @@ document.addEventListener("visibilitychange", (event) => {
         document.title = "Hey, volte aqui ☹️";
     }
 });
+
+window.addEventListener('load', function() {
+    // Seleciona o formulário pelo atributo 'data-form'
+    const form = document.querySelector('[data-form]');
+    
+    // Se o formulário for encontrado, limpa seus campos.
+    if (form) {
+      form.reset();
+    }
+});
