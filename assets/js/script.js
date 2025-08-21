@@ -157,3 +157,73 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
   });
 }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const ratingInputs = document.querySelectorAll('input[name="rating"]');
+      const ratingMessage = document.getElementById('rating-message');
+      
+      // Verificar se já avaliou anteriormente
+      const hasRated = localStorage.getItem('portfolioRated');
+      if (hasRated) {
+        ratingMessage.textContent = 'Obrigado por sua avaliação anterior!';
+        ratingMessage.classList.add('success-message');
+        // Desabilitar novas avaliações se já tiver avaliado
+        ratingInputs.forEach(input => {
+          input.disabled = true;
+        });
+        document.querySelectorAll('.rating-box label').forEach(label => {
+          label.style.cursor = 'default';
+          label.style.pointerEvents = 'none';
+        });
+      }
+      
+      ratingInputs.forEach(input => {
+        input.addEventListener('change', async function() {
+          const rating = this.value;
+          
+          try {
+            
+            const response = await fetch('https://formspree.io/f/xgvzjgzj', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ 
+                rating: rating,
+                page: 'portfolio',
+                _subject: `Nova avaliação: ${rating} estrelas`
+              })
+            });
+            
+            const result = await response.json();
+            
+            if (response.ok) {
+              ratingMessage.textContent = 'Obrigado pela sua avaliação!';
+              ratingMessage.classList.remove('error-message');
+              ratingMessage.classList.add('success-message');
+              
+              // Salvar no localStorage para evitar múltiplas avaliações
+              localStorage.setItem('portfolioRated', 'true');
+              
+              // Desabilitar novas avaliações
+              ratingInputs.forEach(input => {
+                input.disabled = true;
+              });
+              document.querySelectorAll('.rating-box label').forEach(label => {
+                label.style.cursor = 'default';
+                label.style.pointerEvents = 'none';
+              });
+            } else {
+              ratingMessage.textContent = 'Erro ao enviar avaliação: ' + result.message;
+              ratingMessage.classList.remove('success-message');
+              ratingMessage.classList.add('error-message');
+            }
+          } catch (error) {
+            console.error('Erro:', error);
+            ratingMessage.textContent = 'Erro de conexão. Tente novamente.';
+            ratingMessage.classList.remove('success-message');
+            ratingMessage.classList.add('error-message');
+          }
+        });
+      });
+    });

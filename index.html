@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
 
   <!--
     - favicon
@@ -146,6 +147,27 @@
           </li>
 
         </ul>
+        <!-- Sistema de Classificação por Estrelas -->
+        <div class="rating-system">
+          <p class="rating-title">AVALIE MEU PORTFÓLIO</p>
+          <div class="rating-container">
+            <div class="rating-box">
+              <input type="radio" id="rating-5" name="rating" value="5" hidden>
+              <label for="rating-5" class="fas fa-star"></label>
+              <input type="radio" id="rating-4" name="rating" value="4" hidden>
+              <label for="rating-4" class="fas fa-star"></label>
+              <input type="radio" id="rating-3" name="rating" value="3" hidden>
+              <label for="rating-3" class="fas fa-star"></label>
+              <input type="radio" id="rating-2" name="rating" value="2" hidden>
+              <label for="rating-2" class="fas fa-star"></label>
+              <input type="radio" id="rating-1" name="rating" value="1" hidden>
+              <label for="rating-1" class="fas fa-star"></label>
+              <div class="rating-emoji"></div>
+            </div>
+            <div class="rating-message" id="rating-message"></div>
+          </div>
+        </div>
+
 
       </div>
 

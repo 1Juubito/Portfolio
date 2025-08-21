@@ -1880,3 +1880,147 @@ textarea.form-input::-webkit-resizer { display: none; }
   .timeline-text { max-width: 700px; }
 
 }
+/* Sistema de Classificação por Estrelas - Alinhado à Esquerda */
+.rating-system {
+  margin-top: 20px;
+  padding: 15px 0;
+  border-top: 1px solid var(--jet);
+  width: 100%;
+  margin-left: -10px; /* Margem negativa para forçar à esquerda */
+  padding-left: 10px; /* Compensa a margem negativa */
+}
+
+.rating-title {
+  color: var(--light-gray-70);
+  font-size: var(--fs-7);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  text-align: center;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.rating-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.rating-box {
+  gap: 5px;
+  display: flex;
+  position: relative;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+  flex-direction: row-reverse;
+  width: 100%;
+  margin-left: -27px; /* Margem negativa adicional */
+}
+
+.rating-box input {
+  display: none;
+}
+
+.rating-box label {
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--jet);
+  margin-right: 2px;
+}
+
+.rating-box label:hover,
+.rating-box label:hover ~ label {
+  color: #ffd700;
+  transform: scale(1.1);
+}
+
+.rating-box input:checked ~ label {
+  color: #ffa534;
+  animation: filling-animation .7s forwards;
+  filter: drop-shadow(0px 0px 5px #ffa534);
+}
+
+.rating-box input:not(:checked) ~ label {
+  color: #eeeeee3a;
+  transition: .3s;
+}
+
+.rating-emoji {
+  height: fit-content;
+  text-align: left;
+  margin-top: 10px;
+  font-size: 28px;
+  color: white;
+  filter: drop-shadow(0px 0px 8px #ffffff3f);
+  min-height: 40px;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+#rating-1:checked ~ .rating-emoji::after {
+  content: '😞';
+}
+
+#rating-2:checked ~ .rating-emoji::after {
+  content: '😐';
+}
+
+#rating-3:checked ~ .rating-emoji::after {
+  content: '🙂';
+}
+
+#rating-4:checked ~ .rating-emoji::after {
+  content: '😃';
+}
+
+#rating-5:checked ~ .rating-emoji::after {
+  content: '😍';
+}
+
+.rating-message {
+  margin-top: 10px;
+  font-size: var(--fs-8);
+  color: var(--light-gray);
+  min-height: 20px;
+  text-align: center;
+  padding-left: 0;
+  margin-left: 0;
+  width: 100%;
+}
+
+@keyframes filling-animation {
+  0%, 100% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.2);
+  }
+}
+
+/* Estilo para mensagens de feedback */
+.success-message {
+  color: #4caf50;
+}
+
+.error-message {
+  color: #f44336;
+}
+
+/* Forçar alinhamento à esquerda se necessário */
+.sidebar-info_more .rating-system {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.sidebar-info_more .rating-system > * {
+  margin-left: 0;
+  padding-left: 0;
+}
