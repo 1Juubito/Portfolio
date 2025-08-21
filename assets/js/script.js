@@ -227,3 +227,11 @@ for (let i = 0; i < navigationLinks.length; i++) {
         });
       });
     });
+
+document.addEventListener("visibilitychange", (event) => {
+    if (document.visibilityState === "visible") {
+        document.title = "Seja bem vindo 😀";
+    } else {
+        document.title = "Hey, volte aqui ☹️";
+    }
+});
