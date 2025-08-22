@@ -2050,3 +2050,160 @@ textarea.form-input::-webkit-resizer { display: none; }
 }
 
 /* --- Fim do Código de Animação --- */
+
+/* ============= CSS DO ASSISTENTE J.A.R.V.I.S. ============ */
+
+/* Estilo do Botão Flutuante */
+.jarvis-talk-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #00bcd4; /* Cor ciano */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    z-index: 2001; /* Z-index alto para ficar sobre a modal quando ela estiver ativa */
+    transition: all 0.2s ease-in-out;
+}
+
+.jarvis-talk-btn:hover {
+    transform: scale(1.1);
+    background-color: #00dcfd;
+}
+
+/* Fundo da Modal (Overlay) */
+.jarvis-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Fundo preto bem escuro e semi-transparente */
+    display: none; /* Começa escondida */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Classe para ativar a modal via JS */
+.jarvis-modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Conteúdo principal da Modal */
+.jarvis-modal-content {
+    background: #181818; /* Fundo escuro para a janela */
+    padding: 20px 40px 40px 40px;
+    border-radius: 15px;
+    border: 1px solid #00bcd4;
+    text-align: center;
+    position: relative;
+    color: #aed0d0;
+    font-family: "Roboto Mono", monospace;
+    box-shadow: 0 0 30px rgba(0, 188, 212, 0.5);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.jarvis-modal-overlay.active .jarvis-modal-content {
+    transform: scale(1);
+}
+
+/* Títulos dentro da Modal */
+.jarvis-modal-content h1 {
+    color: #00bcd4;
+    font-size: 40px;
+    margin-top: 10px;
+}
+
+.jarvis-modal-content h2.content {
+    font-size: 18px;
+    font-weight: 300;
+    min-height: 30px;
+}
+
+/* Botão de fechar */
+.jarvis-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #aed0d0;
+    font-size: 28px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.jarvis-close-btn:hover {
+    color: white;
+    transform: rotate(90deg);
+}
+
+/* ============= FIM DO CSS DO J.A.R.V.I.S. ============ */
+
+/* ======== CSS RESPONSIVO PARA O J.A.R.V.I.S. ======== */
+/* (Estilos para telas menores que 768px)        */
+
+/* ======================================================= */
+/* ======== CSS RESPONSIVO PARA O J.A.R.V.I.S. ======== */
+/* (Estilos para telas menores que 768px)        */
+/* ======================================================= */
+
+@media (max-width: 768px) {
+
+    /* 1. Adiciona um "respiro" no final da página */
+    /* Isso impede que qualquer conteúdo role para trás do botão */
+    body {
+        padding-bottom: 80px !important; 
+    }
+
+    /* 2. Reposiciona o botão flutuante mais para o canto */
+    .jarvis-talk-btn {
+        width: 50px;
+        height: 50px;
+        /* AJUSTE FINO: Valores menores para colar mais no canto */
+        right: 15px;
+        bottom: 15px; 
+        font-size: 20px;
+    }
+
+    /* 3. Ajusta a posição da janelinha "Ouvindo..." */
+    .jarvis-listener-box {
+        right: 15px;
+        bottom: 75px; /* Sobe um pouco para ficar acima do novo botão */
+        width: calc(100vw - 30px);
+        text-align: center;
+    }
+
+    /* 4. Ajusta a janela grande (modal) para caber na tela */
+    .jarvis-modal-content {
+        width: 90vw;
+        padding: 20px;
+        padding-top: 40px;
+    }
+
+    .jarvis-modal-content img {
+        width: 200px !important;
+        height: auto;
+    }
+    
+    .jarvis-modal-content h1 {
+        font-size: 32px;
+    }
+    
+    .jarvis-modal-content h2.content {
+        font-size: 16px;
+    }
+}
