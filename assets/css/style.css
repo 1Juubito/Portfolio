@@ -2,14 +2,9 @@
   #style.css
 \*-----------------------------------*/
 
-
 /**
  * copyright 2022 @codewithsadee
  */
-
-
-
-
 
 /*-----------------------------------*\
   #CUSTOM PROPERTY
@@ -2007,3 +2002,51 @@ textarea.form-input::-webkit-resizer { display: none; }
   margin-left: 0;
   padding-left: 0;
 }
+
+/* --- Início do Código para Animação do Link --- */
+
+/* 1. Variáveis */
+:root {
+  --cor-linha-inativa: #BBC1E1;
+  --cor-linha-ativa: #275EFE;
+}
+
+/* 2. Estilo base APENAS para o link com a classe .link-animado */
+.link-animado {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  margin: 0 0px;
+  transition: margin 0.25s;
+}
+
+/* 3. Estilo para o SVG dentro do nosso link específico */
+.link-animado svg {
+  width: 76px;
+  height: 40px;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 7px) translateZ(0); 
+  fill: none;
+  stroke: var(--cor-linha-inativa);
+  stroke-linecap: round;
+  stroke-width: 2px;
+  stroke-dasharray: 69px 278px;
+  stroke-dashoffset: 361px;
+  transition: stroke 0.25s ease 0.1s, stroke-dasharray 0.35s;
+}
+
+/* 4. Animação no hover do nosso link específico */
+.link-animado:hover {
+  margin: 0 4px;
+}
+
+.link-animado:hover svg {
+  stroke: var(--cor-linha-ativa);
+  /* Agora usa a variável que o JS criou, com um valor padrão caso algo falhe */
+  stroke-dasharray: var(--hover-dasharray-length, 200px) 278px;
+}
+
+/* --- Fim do Código de Animação --- */

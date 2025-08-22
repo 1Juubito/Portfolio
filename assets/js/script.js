@@ -1,11 +1,33 @@
 'use strict';
 
+// SCRIPT PARA ANIMAÇÃO DO LINK SUBLINHADO
+
+
+function resizeAnimatedLinks() {
+  const visibleArticle = document.querySelector('article.active');
+  if (!visibleArticle) return;
+
+  const linksAnimados = visibleArticle.querySelectorAll('.link-animado');
+
+  linksAnimados.forEach(link => {
+    const textSpan = link.querySelector('.link-animado-texto');
+    const svg = link.querySelector('svg');
+
+    if (textSpan && svg) {
+      const textWidth = textSpan.getBoundingClientRect().width;
+      
+      svg.style.setProperty('width', `${textWidth + 10}px`, 'important');
+
+      const animationLength = textWidth * 2.5; 
+      svg.style.setProperty('--hover-dasharray-length', `${animationLength}px`);
+    }
+  });
+}
+
 
 
 // element toggle function
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
-
-
 
 // sidebar variables
 const sidebar = document.querySelector("[data-sidebar]");
@@ -13,8 +35,6 @@ const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
 // sidebar toggle functionality for mobile
 sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
-
-
 
 // testimonials variables
 const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
@@ -35,25 +55,18 @@ const testimonialsModalFunc = function () {
 
 // add click event to all modal items
 for (let i = 0; i < testimonialsItem.length; i++) {
-
   testimonialsItem[i].addEventListener("click", function () {
-
     modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
     modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
     modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
     modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
-
     testimonialsModalFunc();
-
   });
-
 }
 
 // add click event to modal close button
 modalCloseBtn.addEventListener("click", testimonialsModalFunc);
 overlay.addEventListener("click", testimonialsModalFunc);
-
-
 
 // custom select variables
 const select = document.querySelector("[data-select]");
@@ -66,54 +79,39 @@ select.addEventListener("click", function () { elementToggleFunc(this); });
 // add event in all select items
 for (let i = 0; i < selectItems.length; i++) {
   selectItems[i].addEventListener("click", function () {
-
     let selectedValue = this.innerText.toLowerCase();
     selectValue.innerText = this.innerText;
     elementToggleFunc(select);
     filterFunc(selectedValue);
-
   });
 }
 
 // filter variables
 const filterItems = document.querySelectorAll("[data-filter-item]");
-
 const filterFunc = function (selectedValue) {
-
   for (let i = 0; i < filterItems.length; i++) {
-
-    if (selectedValue === "all") {
+    if (selectedValue === "todos") {
       filterItems[i].classList.add("active");
     } else if (selectedValue === filterItems[i].dataset.category) {
       filterItems[i].classList.add("active");
     } else {
       filterItems[i].classList.remove("active");
     }
-
   }
-
 }
 
 // add event in all filter button items for large screen
 let lastClickedBtn = filterBtn[0];
-
 for (let i = 0; i < filterBtn.length; i++) {
-
   filterBtn[i].addEventListener("click", function () {
-
     let selectedValue = this.innerText.toLowerCase();
     selectValue.innerText = this.innerText;
     filterFunc(selectedValue);
-
     lastClickedBtn.classList.remove("active");
     this.classList.add("active");
     lastClickedBtn = this;
-
   });
-
 }
-
-
 
 // contact form variables
 const form = document.querySelector("[data-form]");
@@ -123,18 +121,13 @@ const formBtn = document.querySelector("[data-form-btn]");
 // add event to all form input field
 for (let i = 0; i < formInputs.length; i++) {
   formInputs[i].addEventListener("input", function () {
-
-    // check form validation
     if (form.checkValidity()) {
       formBtn.removeAttribute("disabled");
     } else {
       formBtn.setAttribute("disabled", "");
     }
-
   });
 }
-
-
 
 // page navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
@@ -143,10 +136,10 @@ const pages = document.querySelectorAll("[data-page]");
 // add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
-
     for (let i = 0; i < pages.length; i++) {
       if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
         pages[i].classList.add("active");
+        requestAnimationFrame(resizeAnimatedLinks);
         navigationLinks[i].classList.add("active");
         window.scrollTo(0, 0);
       } else {
@@ -154,20 +147,17 @@ for (let i = 0; i < navigationLinks.length; i++) {
         navigationLinks[i].classList.remove("active");
       }
     }
-
   });
 }
 
-    document.addEventListener('DOMContentLoaded', function() {
+// ... (seu código de avaliação e outros listeners vêm aqui) ...
+document.addEventListener('DOMContentLoaded', function() {
       const ratingInputs = document.querySelectorAll('input[name="rating"]');
       const ratingMessage = document.getElementById('rating-message');
-      
-      // Verificar se já avaliou anteriormente
       const hasRated = localStorage.getItem('portfolioRated');
       if (hasRated) {
         ratingMessage.textContent = 'Obrigado por sua avaliação anterior!';
         ratingMessage.classList.add('success-message');
-        // Desabilitar novas avaliações se já tiver avaliado
         ratingInputs.forEach(input => {
           input.disabled = true;
         });
@@ -176,46 +166,29 @@ for (let i = 0; i < navigationLinks.length; i++) {
           label.style.pointerEvents = 'none';
         });
       }
-      
       ratingInputs.forEach(input => {
         input.addEventListener('change', async function() {
           const rating = this.value;
-          
           try {
-            
             const response = await fetch('https://formspree.io/f/xgvzjgzj', {
               method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ 
-                rating: rating,
-                page: 'portfolio',
-                _subject: `Nova avaliação: ${rating} estrelas`
-              })
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ rating: rating, page: 'portfolio', _subject: `Nova avaliação: ${rating} estrelas` })
             });
-            
             const result = await response.json();
-            
             if (response.ok) {
               ratingMessage.textContent = 'Obrigado pela sua avaliação!';
               ratingMessage.classList.remove('error-message');
               ratingMessage.classList.add('success-message');
-              
-              // Salvar no localStorage para evitar múltiplas avaliações
               localStorage.setItem('portfolioRated', 'true');
-              
-              // Desabilitar novas avaliações
-              ratingInputs.forEach(input => {
-                input.disabled = true;
-              });
+              ratingInputs.forEach(input => { input.disabled = true; });
               document.querySelectorAll('.rating-box label').forEach(label => {
                 label.style.cursor = 'default';
                 label.style.pointerEvents = 'none';
               });
             } else {
               ratingMessage.textContent = 'Erro ao enviar avaliação: ' + result.message;
-              ratingMessage.classList.remove('success-message');
+              ratingMessage.classList.remove('error-message');
               ratingMessage.classList.add('error-message');
             }
           } catch (error) {
@@ -228,6 +201,7 @@ for (let i = 0; i < navigationLinks.length; i++) {
       });
     });
 
+// ... (código de título da aba)
 document.addEventListener("visibilitychange", (event) => {
     if (document.visibilityState === "visible") {
         document.title = "Seja bem vindo 😀";
@@ -236,12 +210,13 @@ document.addEventListener("visibilitychange", (event) => {
     }
 });
 
+// ... (código de limpar formulário)
 window.addEventListener('load', function() {
-    // Seleciona o formulário pelo atributo 'data-form'
     const form = document.querySelector('[data-form]');
-    
-    // Se o formulário for encontrado, limpa seus campos.
     if (form) {
       form.reset();
     }
 });
+
+// Roda a função de redimensionamento uma vez quando a página carrega
+document.addEventListener('DOMContentLoaded', resizeAnimatedLinks);
