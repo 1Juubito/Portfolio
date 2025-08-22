@@ -902,16 +902,24 @@
 
           <h3 class="h3 form-title">Formulário de Contato</h3>
 
-          <form action="https://formspree.io/f/mvgqjadl" method ="POST" class="form" data-form>
+          <form id="form-contato" action="https://formspree.io/f/mvgqjadl" method="POST" class="form" data-form>
             <input type="hidden" name="_language" value="pt-BR">
 
-            <div class="input-wrapper">
-              <input type="text" name="fullname" maxlength="50"class="form-input" placeholder="Nome completo" required data-form-input>
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" name="fullname" id="fullname" class="form-input" required data-form-input maxlength="50">
+                <label for="fullname" class="form-label">Nome completo</label>
+              </div>
 
-              <input type="email" name="email" maxlength="50" class="form-input" placeholder="Email" required data-form-input>
+              <div class="form-group">
+                <input type="email" name="email" id="email" class="form-input" required data-form-input maxlength="50">
+                <label for="email" class="form-label">Email</label>
+              </div>
             </div>
-
-            <textarea name="message" maxlength="500" class="form-input" placeholder="Sua Mensagem" required data-form-input></textarea>
+            <div class="form-group">
+              <textarea name="message" id="message" class="form-input" required data-form-input maxlength="500"></textarea>
+              <label for="message" class="form-label">Sua Mensagem</label>
+            </div>
 
             <button class="form-btn" type="submit" disabled data-form-btn>
               <ion-icon name="paper-plane"></ion-icon>
