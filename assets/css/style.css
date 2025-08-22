@@ -2156,38 +2156,26 @@ textarea.form-input::-webkit-resizer { display: none; }
 /* ======== CSS RESPONSIVO PARA O J.A.R.V.I.S. ======== */
 /* (Estilos para telas menores que 768px)        */
 
-/* ======================================================= */
-/* ======== CSS RESPONSIVO PARA O J.A.R.V.I.S. ======== */
-/* (Estilos para telas menores que 768px)        */
-/* ======================================================= */
-
 @media (max-width: 768px) {
 
-    /* 1. Adiciona um "respiro" no final da página */
-    /* Isso impede que qualquer conteúdo role para trás do botão */
-    body {
-        padding-bottom: 80px !important; 
-    }
-
-    /* 2. Reposiciona o botão flutuante mais para o canto */
+    /* 1. Reposiciona o botão flutuante para CIMA */
     .jarvis-talk-btn {
         width: 50px;
         height: 50px;
-        /* AJUSTE FINO: Valores menores para colar mais no canto */
-        right: 15px;
-        bottom: 15px; 
+        right: 20px; /* Distância da direita */
+        bottom: 65px; 
         font-size: 20px;
     }
 
-    /* 3. Ajusta a posição da janelinha "Ouvindo..." */
+    /* 2. Ajusta a posição da janelinha "Ouvindo..." */
     .jarvis-listener-box {
         right: 15px;
-        bottom: 75px; /* Sobe um pouco para ficar acima do novo botão */
+        bottom: 125px; /* (65px do bottom do botão + 50px de altura + 10px de espaço) */
         width: calc(100vw - 30px);
         text-align: center;
     }
 
-    /* 4. Ajusta a janela grande (modal) para caber na tela */
+    /* 3. Ajusta a janela grande (modal) para caber na tela */
     .jarvis-modal-content {
         width: 90vw;
         padding: 20px;
@@ -2197,6 +2185,9 @@ textarea.form-input::-webkit-resizer { display: none; }
     .jarvis-modal-content img {
         width: 200px !important;
         height: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .jarvis-modal-content h1 {
