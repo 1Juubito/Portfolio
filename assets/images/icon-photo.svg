@@ -1,11 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="128" height="128" fill="none" stroke="#FFD43B" stroke-width="48" stroke-linecap="round" stroke-linejoin="round">
-  <!-- Topo do banco de dados -->
-  <ellipse cx="512" cy="224" rx="320" ry="96"/>
-  
-  <!-- Corpo do cilindro -->
-  <path d="M192 224v448c0 53 143 96 320 96s320-43 320-96V224"/>
-  
-  <!-- Linhas intermediárias -->
-  <path d="M192 416c0 53 143 96 320 96s320-43 320-96"/>
-  <path d="M192 608c0 53 143 96 320 96s320-43 320-96"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Camada_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 128 128">
+  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke: url(#Gradiente_sem_nome_23);
+      }
+
+      .st0, .st1, .st2, .st3 {
+        fill: none;
+        stroke-miterlimit: 10;
+        stroke-width: 6px;
+      }
+
+      .st1 {
+        stroke: url(#Gradiente_sem_nome_22);
+      }
+
+      .st2 {
+        stroke: url(#Gradiente_sem_nome_2);
+      }
+
+      .st3 {
+        stroke: url(#Gradiente_sem_nome_21);
+      }
+    </style>
+    <linearGradient id="Gradiente_sem_nome_2" data-name="Gradiente sem nome 2" x1="21" y1="28" x2="107" y2="28" gradientUnits="userSpaceOnUse">
+      <stop offset=".26" stop-color="#ffdb6e"/>
+      <stop offset="1" stop-color="#ffbc5e"/>
+    </linearGradient>
+    <linearGradient id="Gradiente_sem_nome_21" data-name="Gradiente sem nome 2" y1="63.5" y2="63.5" xlink:href="#Gradiente_sem_nome_2"/>
+    <linearGradient id="Gradiente_sem_nome_22" data-name="Gradiente sem nome 2" y1="59.5" y2="59.5" xlink:href="#Gradiente_sem_nome_2"/>
+    <linearGradient id="Gradiente_sem_nome_23" data-name="Gradiente sem nome 2" y1="83.5" y2="83.5" xlink:href="#Gradiente_sem_nome_2"/>
+  </defs>
+  <ellipse class="st2" cx="64" cy="28" rx="40" ry="12"/>
+  <path class="st3" d="M24,28v56c0,6.62,17.88,12,40,12s40-5.38,40-12V28"/>
+  <path class="st1" d="M24,52c0,6.62,17.88,12,40,12s40-5.38,40-12"/>
+  <path class="st0" d="M24,76c0,6.62,17.88,12,40,12s40-5.38,40-12"/>
 </svg>
