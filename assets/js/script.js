@@ -223,33 +223,87 @@ document.addEventListener('DOMContentLoaded', resizeAnimatedLinks);
 // ... (todo o código anterior do script.js permanece o mesmo) ...
 
 // CÓDIGO FINAL E ATUALIZADO PARA O FORMULÁRIO DE CONTATO
+// ... (todo o código anterior do script.js permanece o mesmo) ...
+
+// =============================================================
+// ===== CÓDIGO FINAL E ATUALIZADO PARA O FORMULÁRIO E POPUP =====
+// =============================================================
 document.addEventListener('DOMContentLoaded', function () {
+    // Seletores dos Elementos
     const form = document.getElementById('form-contato');
     const loadingAnimation = document.getElementById('deadline');
-    const loadingOverlay = document.getElementById('loading-overlay'); 
+    const loadingOverlay = document.getElementById('loading-overlay');
+    const successPopup = document.getElementById('success-popup');
+    const closePopupBtn = document.getElementById('popup-close-btn');
 
+    // Função para mostrar o popup
+    function showSuccessPopup() {
+        if (successPopup) {
+            successPopup.classList.add('active');
+        }
+    }
+
+    // Função para esconder o popup
+    function hideSuccessPopup() {
+        if (successPopup) {
+            successPopup.classList.remove('active');
+        }
+    }
+
+    // Lógica de Envio do Formulário
     if (form) {
         form.addEventListener('submit', function (e) {
             e.preventDefault(); 
 
-            // Mostra o overlay e a animação
+            // Mostra o loading
             if (loadingOverlay) loadingOverlay.style.display = 'block';
             if (loadingAnimation) loadingAnimation.style.display = 'block';
             
-            // Simula o tempo de envio (agora 10 segundos)
+            // Espera os 17 segundos da animação
             setTimeout(() => {
-                // Esconde o overlay e a animação
+                // Esconde o loading
                 if (loadingOverlay) loadingOverlay.style.display = 'none';
                 if (loadingAnimation) loadingAnimation.style.display = 'none';
                 
-                alert('Mensagem enviada com sucesso! 😄');
-                form.submit(); 
-                form.reset(); 
+                // Mostra o popup de sucesso
+                showSuccessPopup();
+                
+                // Envia o formulário para o Formspree em segundo plano
+                fetch(form.action, {
+                    method: form.method,
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        console.log('Formulário enviado com sucesso!');
+                    } else {
+                        console.error('Erro ao enviar o formulário.');
+                    }
+                }).catch(error => {
+                    console.error('Erro de rede:', error);
+                });
+
+                form.reset(); // Limpa os campos
                 
                 const formBtn = document.querySelector("[data-form-btn]");
                 formBtn.setAttribute("disabled", "");
 
-            }, 17000); // ALTERADO PARA 10 SEGUNDOS
+            }, 17000); // 17 segundos, como você definiu!
+        });
+    }
+
+    // Listeners para fechar o popup
+    if (closePopupBtn) {
+        closePopupBtn.addEventListener('click', hideSuccessPopup);
+    }
+    if (successPopup) {
+        // Fecha também se clicar no fundo (overlay)
+        successPopup.addEventListener('click', function(e) {
+            if (e.target === successPopup) {
+                hideSuccessPopup();
+            }
         });
     }
 });
