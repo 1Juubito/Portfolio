@@ -220,3 +220,36 @@ window.addEventListener('load', function() {
 
 // Roda a função de redimensionamento uma vez quando a página carrega
 document.addEventListener('DOMContentLoaded', resizeAnimatedLinks);
+// ... (todo o código anterior do script.js permanece o mesmo) ...
+
+// CÓDIGO FINAL E ATUALIZADO PARA O FORMULÁRIO DE CONTATO
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('form-contato');
+    const loadingAnimation = document.getElementById('deadline');
+    const loadingOverlay = document.getElementById('loading-overlay'); 
+
+    if (form) {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); 
+
+            // Mostra o overlay e a animação
+            if (loadingOverlay) loadingOverlay.style.display = 'block';
+            if (loadingAnimation) loadingAnimation.style.display = 'block';
+            
+            // Simula o tempo de envio (agora 10 segundos)
+            setTimeout(() => {
+                // Esconde o overlay e a animação
+                if (loadingOverlay) loadingOverlay.style.display = 'none';
+                if (loadingAnimation) loadingAnimation.style.display = 'none';
+                
+                alert('Mensagem enviada com sucesso! 😄');
+                form.submit(); 
+                form.reset(); 
+                
+                const formBtn = document.querySelector("[data-form-btn]");
+                formBtn.setAttribute("disabled", "");
+
+            }, 17000); // ALTERADO PARA 10 SEGUNDOS
+        });
+    }
+});
