@@ -373,8 +373,9 @@ projectModalCloseBtn.addEventListener("click", projectModalFunc);
 projectOverlay.addEventListener("click", projectModalFunc);
 
 
-// ===== VALIDAÇÃO DE FORMULÁRIO COM ANIMAÇÃO DE LABEL
-
+// ===================================================================================
+// ===== VALIDAÇÃO DE FORMULÁRIO COM ANIMAÇÃO E MENSAGEM DE LIMITE       =============
+// ===================================================================================
 document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.querySelector("[data-form]");
     if (!contactForm) return;
@@ -391,18 +392,20 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const handleValidation = (input, validator, message) => {
-        const errorMessage = input.parentElement.querySelector('.error-message');
         const parentGroup = input.parentElement;
+        const feedbackContainer = parentGroup.querySelector('.form-feedback');
+        const errorMessage = feedbackContainer.querySelector('.error-message');
+        const charCounter = feedbackContainer.querySelector('.char-counter');
         const isValid = validator();
-
-        // Lógica da animação do Label
+        
+        // --- 1. Lógica da Animação do Label ---
         if (input.value.trim() !== '') {
             parentGroup.classList.add('has-value');
         } else {
             parentGroup.classList.remove('has-value');
         }
 
-        // Lógica da mensagem de erro
+        // --- 2. Lógica da Mensagem de Erro ---
         if (input.value.trim() === '' || isValid) {
             errorMessage.textContent = '';
             input.classList.remove('invalid');
@@ -411,6 +414,21 @@ document.addEventListener('DOMContentLoaded', () => {
             input.classList.add('invalid');
         }
 
+        // --- 3. Lógica da Mensagem de Limite de Caracteres (Ajustada) ---
+        const maxLength = input.getAttribute('maxlength');
+        const currentLength = input.value.length;
+
+        if (maxLength) {
+            if (currentLength >= maxLength) {
+                charCounter.textContent = `Limite de ${maxLength} caracteres atingido.`;
+                charCounter.classList.add('limit-reached');
+            } else {
+                // Limpa a mensagem se estiver abaixo do limite
+                charCounter.textContent = '';
+                charCounter.classList.remove('limit-reached');
+            }
+        }
+        
         updateSubmitButtonState();
     };
     
@@ -423,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Adiciona os "ouvintes" a cada campo individualmente
+    // Adiciona os "ouvintes" a cada campo
     fullNameInput.addEventListener('input', () => {
         handleValidation(fullNameInput, validators.fullName, 'O nome deve ter pelo menos 3 caracteres.');
     });

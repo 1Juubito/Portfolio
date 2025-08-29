@@ -2415,19 +2415,35 @@ textarea.form-input {
 }
 
 /*-----------------------------------*\
- * #FORM VALIDATION
+ * #FORM VALIDATION & FEEDBACK
 \*-----------------------------------*/
-
-
-
-.form-group .error-message {
-  color: var(--orange-yellow-crayola); /* Cor vermelha/laranja para o erro */
-  font-size: var(--fs-8);
-  margin-top: 5px;
-  height: 15px; /* Altura fixa para não "empurrar" o layout */
-}
-
 .form-input.invalid {
   border-color: var(--orange-yellow-crayola); /* Borda do campo fica vermelha */
 }
 
+.form-feedback {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 15px;
+  margin-top: 5px;
+}
+
+.form-group .error-message,
+.form-group .char-counter {
+  font-size: var(--fs-8);
+  font-family: var(--font-poppins);
+}
+
+.form-group .error-message {
+  color: var(--orange-yellow-crayola);
+}
+
+.form-group .char-counter {
+  color: var(--light-gray);
+}
+
+.form-group .char-counter.limit-reached {
+  color: var(--orange-yellow-crayola);
+  font-family: var(--font-poppins);
+}

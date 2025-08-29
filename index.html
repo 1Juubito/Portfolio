@@ -930,19 +930,28 @@
               <div class="form-group">
                 <input type="text" name="fullname" id="fullname" class="form-input" required data-form-input maxlength="50">
                 <label for="fullname" class="form-label">Nome completo</label>
-                <div class="error-message"></div>
+                <div class="form-feedback">
+                  <div class="error-message"></div>
+                  <div class="char-counter"></div>
+                </div>
               </div>
 
               <div class="form-group">
                 <input type="email" name="email" id="email" class="form-input" required data-form-input maxlength="50">
                 <label for="email" class="form-label">Email</label>
-                <div class="error-message"></div>
+                <div class="form-feedback">
+                  <div class="error-message"></div>
+                  <div class="char-counter"></div>
+                </div>
               </div>
             </div>
             <div class="form-group">
               <textarea name="message" id="message" class="form-input" required data-form-input maxlength="500"></textarea>
               <label for="message" class="form-label">Sua Mensagem</label>
-              <div class="error-message"></div>
+              <div class="form-feedback">
+                <div class="error-message"></div>
+                <div class="char-counter"></div>
+              </div>
             </div>
 
             <button class="form-btn" type="submit" disabled data-form-btn>
