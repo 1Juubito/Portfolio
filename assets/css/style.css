@@ -2413,3 +2413,21 @@ textarea.form-input {
 .project-item:hover .project-item-icon-box {
   opacity: 1; /* Torna o ícone do olho visível no hover */
 }
+
+/*-----------------------------------*\
+ * #FORM VALIDATION
+\*-----------------------------------*/
+
+
+
+.form-group .error-message {
+  color: var(--orange-yellow-crayola); /* Cor vermelha/laranja para o erro */
+  font-size: var(--fs-8);
+  margin-top: 5px;
+  height: 15px; /* Altura fixa para não "empurrar" o layout */
+}
+
+.form-input.invalid {
+  border-color: var(--orange-yellow-crayola); /* Borda do campo fica vermelha */
+}
+

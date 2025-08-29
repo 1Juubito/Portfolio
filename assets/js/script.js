@@ -371,3 +371,71 @@ for (let i = 0; i < projectItems.length; i++) {
 // Adiciona evento de clique para fechar o modal
 projectModalCloseBtn.addEventListener("click", projectModalFunc);
 projectOverlay.addEventListener("click", projectModalFunc);
+
+
+// ===== VALIDAÇÃO DE FORMULÁRIO COM ANIMAÇÃO DE LABEL
+
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.querySelector("[data-form]");
+    if (!contactForm) return;
+
+    const fullNameInput = contactForm.querySelector("#fullname");
+    const emailInput = contactForm.querySelector("#email");
+    const messageInput = contactForm.querySelector("#message");
+    const submitBtn = contactForm.querySelector("[data-form-btn]");
+
+    const validators = {
+        fullName: () => fullNameInput.value.trim().length >= 3,
+        email: () => /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(emailInput.value),
+        message: () => messageInput.value.trim().length >= 10
+    };
+
+    const handleValidation = (input, validator, message) => {
+        const errorMessage = input.parentElement.querySelector('.error-message');
+        const parentGroup = input.parentElement;
+        const isValid = validator();
+
+        // Lógica da animação do Label
+        if (input.value.trim() !== '') {
+            parentGroup.classList.add('has-value');
+        } else {
+            parentGroup.classList.remove('has-value');
+        }
+
+        // Lógica da mensagem de erro
+        if (input.value.trim() === '' || isValid) {
+            errorMessage.textContent = '';
+            input.classList.remove('invalid');
+        } else {
+            errorMessage.textContent = message;
+            input.classList.add('invalid');
+        }
+
+        updateSubmitButtonState();
+    };
+    
+    const updateSubmitButtonState = () => {
+        const isFormValid = validators.fullName() && validators.email() && validators.message();
+        if (isFormValid) {
+            submitBtn.removeAttribute("disabled");
+        } else {
+            submitBtn.setAttribute("disabled", "");
+        }
+    };
+
+    // Adiciona os "ouvintes" a cada campo individualmente
+    fullNameInput.addEventListener('input', () => {
+        handleValidation(fullNameInput, validators.fullName, 'O nome deve ter pelo menos 3 caracteres.');
+    });
+
+    emailInput.addEventListener('input', () => {
+        handleValidation(emailInput, validators.email, 'Por favor, insira um email válido.');
+    });
+
+    messageInput.addEventListener('input', () => {
+        handleValidation(messageInput, validators.message, 'A mensagem deve ter pelo menos 10 caracteres.');
+    });
+
+    // Garante que o botão comece desabilitado
+    submitBtn.setAttribute("disabled", "");
+});
