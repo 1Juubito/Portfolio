@@ -2049,7 +2049,6 @@ textarea.form-input::-webkit-resizer { display: none; }
   stroke-dasharray: var(--hover-dasharray-length, 200px) 278px;
 }
 
-/* --- Fim do Código de Animação --- */
 
 /* ============= CSS DO ASSISTENTE J.A.R.V.I.S. ============ */
 
@@ -2151,7 +2150,6 @@ textarea.form-input::-webkit-resizer { display: none; }
     transform: rotate(90deg);
 }
 
-/* ============= FIM DO CSS DO J.A.R.V.I.S. ============ */
 
 /* ======== CSS RESPONSIVO PARA O J.A.R.V.I.S. ======== */
 /* (Estilos para telas menores que 768px)        */
@@ -2261,7 +2259,6 @@ textarea.form-input {
 
 }
 
-/* ... (todo o seu CSS existente vem antes) ... */
 
 /* ================================== */
 /* ====== ESTILOS DO NOVO POPUP ===== */
@@ -2337,4 +2334,82 @@ textarea.form-input {
   color: var(--light-gray);
   font-size: var(--fs-6);
   line-height: 1.6;
+}
+
+/*-----------------------------------*\
+ * #PROJECT MODAL
+\*-----------------------------------*/
+
+.project-modal .modal-content {
+  max-width: 800px;
+}
+
+.project-modal h5 {
+  font-size: var(--fs-6);
+  font-weight: var(--fw-600);
+  margin-block: 15px 8px;
+  color: var(--white-2);
+}
+
+.project-modal .tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.project-modal .tech-list li {
+  background-color: var(--onyx);
+  color: var(--light-gray);
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: var(--fs-8);
+}
+
+.project-modal .modal-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.project-modal .modal-links .form-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  margin: 0;
+}
+
+.project-modal .modal-links .form-btn:disabled {
+  display: none;
+}
+
+/*-----------------------------------*\
+ * #PROJECT HOVER EFFECT
+\*-----------------------------------*/
+
+.project-item {
+  cursor: pointer;
+}
+
+.project-item .project-img {
+  overflow: hidden; /* Garante que o zoom não saia da área da imagem */
+}
+
+.project-item .project-img img {
+  transition: transform var(--transition-2); /* Adiciona uma transição suave para o zoom */
+}
+
+.project-item:hover .project-img img {
+  transform: scale(1.05); /* Aplica um leve zoom na imagem */
+}
+
+.project-item .project-item-icon-box {
+  opacity: 0; /* Deixa o ícone do olho invisível por padrão */
+  transition: opacity var(--transition-1); /* Adiciona uma transição suave para o ícone */
+}
+
+.project-item:hover .project-item-icon-box {
+  opacity: 1; /* Torna o ícone do olho visível no hover */
 }

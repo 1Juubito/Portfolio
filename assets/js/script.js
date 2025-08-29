@@ -150,7 +150,6 @@ for (let i = 0; i < navigationLinks.length; i++) {
   });
 }
 
-// ... (seu código de avaliação e outros listeners vêm aqui) ...
 document.addEventListener('DOMContentLoaded', function() {
       const ratingInputs = document.querySelectorAll('input[name="rating"]');
       const ratingMessage = document.getElementById('rating-message');
@@ -220,14 +219,10 @@ window.addEventListener('load', function() {
 
 // Roda a função de redimensionamento uma vez quando a página carrega
 document.addEventListener('DOMContentLoaded', resizeAnimatedLinks);
-// ... (todo o código anterior do script.js permanece o mesmo) ...
 
-// CÓDIGO FINAL E ATUALIZADO PARA O FORMULÁRIO DE CONTATO
-// ... (todo o código anterior do script.js permanece o mesmo) ...
 
-// =============================================================
-// ===== CÓDIGO FINAL E ATUALIZADO PARA O FORMULÁRIO E POPUP =====
-// =============================================================
+// ===== FORMULÁRIO E POPUP =====
+
 document.addEventListener('DOMContentLoaded', function () {
     // Seletores dos Elementos
     const form = document.getElementById('form-contato');
@@ -307,3 +302,72 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+// =============================================================
+// ===== LÓGICA PARA O MODAL DE PROJETOS =======================
+// =============================================================
+
+const projectItems = document.querySelectorAll("[data-project-item]");
+const projectModalContainer = document.querySelector("[data-project-modal-container]");
+const projectModalCloseBtn = document.querySelector("[data-project-modal-close-btn]");
+const projectOverlay = document.querySelector("[data-project-overlay]");
+
+// Variáveis do modal
+const projectModalImg = document.querySelector("[data-project-modal-img]");
+const projectModalTitle = document.querySelector("[data-project-modal-title]");
+const projectModalText = document.querySelector("[data-project-modal-text]");
+const projectModalLinkRepo = document.querySelector("[data-project-modal-link-repo]");
+const projectModalLinkDemo = document.querySelector("[data-project-modal-link-demo]");
+
+// Função para abrir/fechar o modal
+const projectModalFunc = function () {
+  projectModalContainer.classList.toggle("active");
+  projectOverlay.classList.toggle("active");
+}
+
+// Adiciona evento de clique a todos os itens de projeto
+for (let i = 0; i < projectItems.length; i++) {
+  projectItems[i].addEventListener("click", function () {
+    
+    // Pega os dados do projeto clicado usando os atributos 'data-*'
+    const title = this.dataset.title;
+    const imgSrc = this.dataset.img;
+    const description = this.dataset.description;
+    const tech = this.dataset.tech;
+    const learnings = this.dataset.learnings;
+    const repoLink = this.dataset.repoLink;
+    const demoLink = this.dataset.demoLink;
+
+    // Popula o modal com as informações
+    projectModalTitle.innerHTML = title;
+    projectModalImg.src = imgSrc;
+    projectModalImg.alt = title;
+    
+    // Constrói o HTML interno para a descrição
+    const techListItems = tech.split(',').map(t => `<li>${t.trim()}</li>`).join('');
+    projectModalText.innerHTML = `
+      <p>${description}</p>
+      <h5>Tecnologias Usadas:</h5>
+      <ul class="tech-list">${techListItems}</ul>
+      <h5>Aprendizados:</h5>
+      <p>${learnings}</p>
+    `;
+    
+    // Popula os links
+    projectModalLinkRepo.href = repoLink;
+
+    // Mostra ou esconde o botão de "Ver Online"
+    if (demoLink) {
+      projectModalLinkDemo.href = demoLink;
+      projectModalLinkDemo.style.display = 'flex';
+    } else {
+      projectModalLinkDemo.style.display = 'none';
+    }
+
+    projectModalFunc();
+  });
+}
+
+// Adiciona evento de clique para fechar o modal
+projectModalCloseBtn.addEventListener("click", projectModalFunc);
+projectOverlay.addEventListener("click", projectModalFunc);

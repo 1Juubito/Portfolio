@@ -314,8 +314,6 @@ Language: HTML, CSS3 and SVG
   }
 }
 
-/* --- NOVOS ESTILOS PARA O OVERLAY E AJUSTE DO LOADING --- */
-
 /* Fundo escuro que cobre a tela toda */
 #loading-overlay {
     position: fixed; /* Fica fixo na tela */
@@ -330,6 +328,5 @@ Language: HTML, CSS3 and SVG
 
 /* Garante que a animação fique na frente do fundo escuro */
 #deadline {
-    /* ... (seus estilos existentes para #deadline) ... */
     z-index: 1000; /* Z-index maior que o do overlay */
 }
