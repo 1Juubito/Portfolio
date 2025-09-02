@@ -45,7 +45,7 @@ function displayNews(articles) {
         const bannerHtml = article.cover_image
             ? `
             <figure class="blog-banner-box">
-                <img src="${article.cover_image}" alt="${article.title}" loading="lazy">
+                <img src="${article.cover_image}" alt="${article.title}" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('img-error');">
             </figure>`
             : ''; // Se não houver imagem, essa parte fica vazia
 
