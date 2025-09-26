@@ -1,8 +1,5 @@
 'use strict';
 
-// SCRIPT PARA ANIMAÇÃO DO LINK SUBLINHADO
-
-
 function resizeAnimatedLinks() {
   const visibleArticle = document.querySelector('article.active');
   if (!visibleArticle) return;
@@ -24,36 +21,26 @@ function resizeAnimatedLinks() {
   });
 }
 
-
-
-// element toggle function
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
-
-// sidebar variables
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
-// sidebar toggle functionality for mobile
 sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
 
-// testimonials variables
 const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
 const modalContainer = document.querySelector("[data-modal-container]");
 const modalCloseBtn = document.querySelector("[data-modal-close-btn]");
 const overlay = document.querySelector("[data-overlay]");
 
-// modal variable
 const modalImg = document.querySelector("[data-modal-img]");
 const modalTitle = document.querySelector("[data-modal-title]");
 const modalText = document.querySelector("[data-modal-text]");
 
-// modal toggle function
 const testimonialsModalFunc = function () {
   modalContainer.classList.toggle("active");
   overlay.classList.toggle("active");
 }
 
-// add click event to all modal items
 for (let i = 0; i < testimonialsItem.length; i++) {
   testimonialsItem[i].addEventListener("click", function () {
     modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
@@ -64,11 +51,9 @@ for (let i = 0; i < testimonialsItem.length; i++) {
   });
 }
 
-// add click event to modal close button
 modalCloseBtn.addEventListener("click", testimonialsModalFunc);
 overlay.addEventListener("click", testimonialsModalFunc);
 
-// custom select variables
 const select = document.querySelector("[data-select]");
 const selectItems = document.querySelectorAll("[data-select-item]");
 const selectValue = document.querySelector("[data-selecct-value]");
@@ -76,7 +61,6 @@ const filterBtn = document.querySelectorAll("[data-filter-btn]");
 
 select.addEventListener("click", function () { elementToggleFunc(this); });
 
-// add event in all select items
 for (let i = 0; i < selectItems.length; i++) {
   selectItems[i].addEventListener("click", function () {
     let selectedValue = this.innerText.toLowerCase();
@@ -86,7 +70,6 @@ for (let i = 0; i < selectItems.length; i++) {
   });
 }
 
-// filter variables
 const filterItems = document.querySelectorAll("[data-filter-item]");
 const filterFunc = function (selectedValue) {
   for (let i = 0; i < filterItems.length; i++) {
@@ -100,7 +83,6 @@ const filterFunc = function (selectedValue) {
   }
 }
 
-// add event in all filter button items for large screen
 let lastClickedBtn = filterBtn[0];
 for (let i = 0; i < filterBtn.length; i++) {
   filterBtn[i].addEventListener("click", function () {
@@ -113,12 +95,10 @@ for (let i = 0; i < filterBtn.length; i++) {
   });
 }
 
-// contact form variables
 const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
 const formBtn = document.querySelector("[data-form-btn]");
 
-// add event to all form input field
 for (let i = 0; i < formInputs.length; i++) {
   formInputs[i].addEventListener("input", function () {
     if (form.checkValidity()) {
@@ -129,11 +109,9 @@ for (let i = 0; i < formInputs.length; i++) {
   });
 }
 
-// page navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-// add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
     for (let i = 0; i < pages.length; i++) {
@@ -200,7 +178,6 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
 
-// ... (código de título da aba)
 document.addEventListener("visibilitychange", (event) => {
     if (document.visibilityState === "visible") {
         document.title = "Seja bem vindo 😀";
@@ -209,7 +186,6 @@ document.addEventListener("visibilitychange", (event) => {
     }
 });
 
-// ... (código de limpar formulário)
 window.addEventListener('load', function() {
     const form = document.querySelector('[data-form]');
     if (form) {
@@ -217,53 +193,36 @@ window.addEventListener('load', function() {
     }
 });
 
-// Roda a função de redimensionamento uma vez quando a página carrega
 document.addEventListener('DOMContentLoaded', resizeAnimatedLinks);
 
-
-// ===== FORMULÁRIO E POPUP =====
-
 document.addEventListener('DOMContentLoaded', function () {
-    // Seletores dos Elementos
     const form = document.getElementById('form-contato');
     const loadingAnimation = document.getElementById('deadline');
     const loadingOverlay = document.getElementById('loading-overlay');
     const successPopup = document.getElementById('success-popup');
     const closePopupBtn = document.getElementById('popup-close-btn');
 
-    // Função para mostrar o popup
     function showSuccessPopup() {
         if (successPopup) {
             successPopup.classList.add('active');
         }
     }
 
-    // Função para esconder o popup
     function hideSuccessPopup() {
         if (successPopup) {
             successPopup.classList.remove('active');
         }
     }
 
-    // Lógica de Envio do Formulário
     if (form) {
         form.addEventListener('submit', function (e) {
             e.preventDefault(); 
-
-            // Mostra o loading
             if (loadingOverlay) loadingOverlay.style.display = 'block';
             if (loadingAnimation) loadingAnimation.style.display = 'block';
-            
-            // Espera os 17 segundos da animação
             setTimeout(() => {
-                // Esconde o loading
                 if (loadingOverlay) loadingOverlay.style.display = 'none';
                 if (loadingAnimation) loadingAnimation.style.display = 'none';
-                
-                // Mostra o popup de sucesso
                 showSuccessPopup();
-                
-                // Envia o formulário para o Formspree em segundo plano
                 fetch(form.action, {
                     method: form.method,
                     body: new FormData(form),
@@ -279,22 +238,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 }).catch(error => {
                     console.error('Erro de rede:', error);
                 });
-
-                form.reset(); // Limpa os campos
-                
+                form.reset();
                 const formBtn = document.querySelector("[data-form-btn]");
                 formBtn.setAttribute("disabled", "");
 
-            }, 17000); // 17 segundos, como você definiu!
+            }, 17000);
         });
     }
 
-    // Listeners para fechar o popup
     if (closePopupBtn) {
         closePopupBtn.addEventListener('click', hideSuccessPopup);
     }
     if (successPopup) {
-        // Fecha também se clicar no fundo (overlay)
         successPopup.addEventListener('click', function(e) {
             if (e.target === successPopup) {
                 hideSuccessPopup();
@@ -303,33 +258,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// =============================================================
-// ===== LÓGICA PARA O MODAL DE PROJETOS =======================
-// =============================================================
-
 const projectItems = document.querySelectorAll("[data-project-item]");
 const projectModalContainer = document.querySelector("[data-project-modal-container]");
 const projectModalCloseBtn = document.querySelector("[data-project-modal-close-btn]");
 const projectOverlay = document.querySelector("[data-project-overlay]");
 
-// Variáveis do modal
 const projectModalImg = document.querySelector("[data-project-modal-img]");
 const projectModalTitle = document.querySelector("[data-project-modal-title]");
 const projectModalText = document.querySelector("[data-project-modal-text]");
 const projectModalLinkRepo = document.querySelector("[data-project-modal-link-repo]");
 const projectModalLinkDemo = document.querySelector("[data-project-modal-link-demo]");
 
-// Função para abrir/fechar o modal
 const projectModalFunc = function () {
   projectModalContainer.classList.toggle("active");
   projectOverlay.classList.toggle("active");
 }
 
-// Adiciona evento de clique a todos os itens de projeto
 for (let i = 0; i < projectItems.length; i++) {
   projectItems[i].addEventListener("click", function () {
     
-    // Pega os dados do projeto clicado usando os atributos 'data-*'
     const title = this.dataset.title;
     const imgSrc = this.dataset.img;
     const description = this.dataset.description;
@@ -338,12 +285,10 @@ for (let i = 0; i < projectItems.length; i++) {
     const repoLink = this.dataset.repoLink;
     const demoLink = this.dataset.demoLink;
 
-    // Popula o modal com as informações
     projectModalTitle.innerHTML = title;
     projectModalImg.src = imgSrc;
     projectModalImg.alt = title;
     
-    // Constrói o HTML interno para a descrição
     const techListItems = tech.split(',').map(t => `<li>${t.trim()}</li>`).join('');
     projectModalText.innerHTML = `
       <p>${description}</p>
@@ -353,10 +298,7 @@ for (let i = 0; i < projectItems.length; i++) {
       <p>${learnings}</p>
     `;
     
-    // Popula os links
     projectModalLinkRepo.href = repoLink;
-
-    // Mostra ou esconde o botão de "Ver Online"
     if (demoLink) {
       projectModalLinkDemo.href = demoLink;
       projectModalLinkDemo.style.display = 'flex';
@@ -368,14 +310,9 @@ for (let i = 0; i < projectItems.length; i++) {
   });
 }
 
-// Adiciona evento de clique para fechar o modal
 projectModalCloseBtn.addEventListener("click", projectModalFunc);
 projectOverlay.addEventListener("click", projectModalFunc);
 
-
-// ===================================================================================
-// ===== VALIDAÇÃO DE FORMULÁRIO COM ANIMAÇÃO E MENSAGEM DE LIMITE       =============
-// ===================================================================================
 document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.querySelector("[data-form]");
     if (!contactForm) return;
@@ -398,14 +335,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const charCounter = feedbackContainer.querySelector('.char-counter');
         const isValid = validator();
         
-        // --- 1. Lógica da Animação do Label ---
         if (input.value.trim() !== '') {
             parentGroup.classList.add('has-value');
         } else {
             parentGroup.classList.remove('has-value');
         }
 
-        // --- 2. Lógica da Mensagem de Erro ---
         if (input.value.trim() === '' || isValid) {
             errorMessage.textContent = '';
             input.classList.remove('invalid');
@@ -414,7 +349,6 @@ document.addEventListener('DOMContentLoaded', () => {
             input.classList.add('invalid');
         }
 
-        // --- 3. Lógica da Mensagem de Limite de Caracteres (Ajustada) ---
         const maxLength = input.getAttribute('maxlength');
         const currentLength = input.value.length;
 
@@ -423,7 +357,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 charCounter.textContent = `Limite de ${maxLength} caracteres atingido.`;
                 charCounter.classList.add('limit-reached');
             } else {
-                // Limpa a mensagem se estiver abaixo do limite
                 charCounter.textContent = '';
                 charCounter.classList.remove('limit-reached');
             }
@@ -441,7 +374,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Adiciona os "ouvintes" a cada campo
     fullNameInput.addEventListener('input', () => {
         handleValidation(fullNameInput, validators.fullName, 'O nome deve ter pelo menos 3 caracteres.');
     });
@@ -454,6 +386,5 @@ document.addEventListener('DOMContentLoaded', () => {
         handleValidation(messageInput, validators.message, 'A mensagem deve ter pelo menos 10 caracteres.');
     });
 
-    // Garante que o botão comece desabilitado
     submitBtn.setAttribute("disabled", "");
 });

@@ -1,11 +1,11 @@
 
 #dragon-canvas { 
-    position: fixed; /* Fica fixo na tela, mesmo com rolagem */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1; /* O truque mágico! Envia o dragão para trás de todo o conteúdo */
-    background: transparent; /* Fundo transparente para que o fundo do seu site apareça */
+    z-index: -1;
+    background: transparent;
     pointer-events: none;
 }

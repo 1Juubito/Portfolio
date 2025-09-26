@@ -1,13 +1,9 @@
 
-// ============ JAVASCRIPT DO J.A.R.V.I.S. MODAL ========== //
-
-// --- Seletores para os elementos do HTML ---
 const btn = document.getElementById('jarvis-btn');
 const content = document.getElementById('jarvis-content');
 const modal = document.getElementById('jarvis-modal');
 const closeBtn = document.querySelector('.jarvis-close-btn');
 
-// --- Função para o assistente falar ---
 function speak(text) {
     const text_speak = new SpeechSynthesisUtterance(text);
     text_speak.rate = 1;
@@ -17,7 +13,6 @@ function speak(text) {
     window.speechSynthesis.speak(text_speak);
 }
 
-// --- Função de saudação baseada na hora ---
 function wishMe() {
     const hour = new Date().getHours();
     if (hour >= 5 && hour < 12) {
@@ -29,7 +24,6 @@ function wishMe() {
     }
 }
 
-// --- Configuração do Reconhecimento de Voz ---
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 recognition.lang = 'pt-BR';
@@ -41,33 +35,25 @@ recognition.onresult = (event) => {
     takeCommand(transcript.toLowerCase());
 };
 
-// --- Lógica para controlar a Modal ---
-
-// Evento para ABRIR a modal e começar a ouvir
 btn.addEventListener('click', () => {
     modal.classList.add('active');
     content.textContent = "Estou ouvindo...";
     speak("Pois não?");
-    // Pequeno delay para a fala de "Pois não?" não ser capturada pelo microfone
     setTimeout(() => {
         recognition.start();
     }, 1200);
 });
 
-// Evento para FECHAR a modal no botão 'X'
 closeBtn.addEventListener('click', () => {
     modal.classList.remove('active');
 });
 
-// Evento para FECHAR a modal clicando no fundo escuro
 modal.addEventListener('click', (event) => {
     if (event.target === modal) {
         modal.classList.remove('active');
     }
 });
 
-
-// --- Função Principal de Comandos ---
 function takeCommand(message) {
     if (message.includes('oi') || message.includes('olá')) {
         speak("Olá Senhor, como posso ajudar?");
@@ -111,8 +97,6 @@ function takeCommand(message) {
     }
 }
 
-// --- Saudação inicial ao carregar a página (opcional, pode ser removido se não quiser) ---
 window.addEventListener('load', () => {
-    // speak("Sistema online."); // Você pode ativar isso se quiser uma saudação ao carregar o site
-    // wishMe();
+
 });

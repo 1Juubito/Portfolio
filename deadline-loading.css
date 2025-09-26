@@ -1,9 +1,3 @@
-/*
-Svg Projects
-Author: Jonathan Trancozo
-Language: HTML, CSS3 and SVG
-*/
-
 
 #deadline {
   width:581px;
@@ -27,7 +21,6 @@ Language: HTML, CSS3 and SVG
   animation-iteration-count: infinite;
 }
 
-/* Death */
 #death-group {
   animation-name: walk;
   animation-timing-function: ease; 
@@ -37,7 +30,6 @@ Language: HTML, CSS3 and SVG
 
 #death-arm {
   animation: move-arm 3s ease infinite;
-  /* transform-origin: left center; */
   transform-origin: -60px 74px;
 }
 
@@ -45,8 +37,6 @@ Language: HTML, CSS3 and SVG
   animation: move-tool 3s ease infinite;
   transform-origin: -48px center;
 }
-
-/* Designer */
 
 #designer-arm-grop {
   animation: write 1.5s ease infinite;
@@ -91,8 +81,6 @@ Language: HTML, CSS3 and SVG
 .mask-white {
   right: 0;
 }
-
-/* Flames */
 
 #red-flame {
   opacity: 0;
@@ -206,8 +194,6 @@ Language: HTML, CSS3 and SVG
   }
 }
 
-/* Design animations */
-
 @keyframes write {
   0% {
       transform: translate(0, 0) rotate(0deg) scale(1, 1);
@@ -314,19 +300,17 @@ Language: HTML, CSS3 and SVG
   }
 }
 
-/* Fundo escuro que cobre a tela toda */
 #loading-overlay {
-    position: fixed; /* Fica fixo na tela */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.85); /* Cor preta com 85% de opacidade */
-    z-index: 999; /* Z-index alto para ficar sobre o conteúdo */
-    display: none; /* Começa escondido */
+    background-color: rgba(0, 0, 0, 0.85); 
+    z-index: 999;
+    display: none;
 }
 
-/* Garante que a animação fique na frente do fundo escuro */
 #deadline {
-    z-index: 1000; /* Z-index maior que o do overlay */
+    z-index: 1000;
 }

@@ -1,8 +1,3 @@
-/*
- * Simple - 404 Page
- * Build Date: October 2016
- * Author: joashp
- */
 
 $(window).load(function() {
 

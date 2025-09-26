@@ -1,15 +1,10 @@
 'use strict';
-
-// Executa o script assim que o HTML da página for carregado
 document.addEventListener('DOMContentLoaded', function () {
 
     const blogContainer = document.getElementById('blog-container');
 
-    // Função principal para buscar e exibir os artigos
     async function getDevToNews() {
-        // API do DEV.to, buscando 6 artigos mais recentes
         const endpoint = 'https://dev.to/api/articles?per_page=6&top=1';
-
         try {
             const response = await fetch(endpoint);
             if (!response.ok) {
@@ -22,12 +17,10 @@ document.addEventListener('DOMContentLoaded', function () {
             blogContainer.innerHTML = "<p>Oops! Não foi possível carregar as notícias. Tente novamente mais tarde.</p>";
         }
     }
- 
-// Função para montar o HTML de cada post e inserir na página 
+
 function displayNews(articles) {
     const blogContainer = document.getElementById('blog-container');
-    blogContainer.innerHTML = ''; // Limpa a mensagem "Carregando..."
-
+    blogContainer.innerHTML = '';
     if (articles.length === 0) {
         blogContainer.innerHTML = "<p>Nenhum artigo encontrado.</p>";
         return;
@@ -41,15 +34,13 @@ function displayNews(articles) {
             day: 'numeric', month: 'short', year: 'numeric'
         });
 
-        // VERIFICA SE EXISTE UMA IMAGEM DE CAPA
         const bannerHtml = article.cover_image
             ? `
             <figure class="blog-banner-box">
                 <img src="${article.cover_image}" alt="${article.title}" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('img-error');">
             </figure>`
-            : ''; // Se não houver imagem, essa parte fica vazia
+            : '';
 
-        // Constrói o HTML interno do post
         postItem.innerHTML = `
             <a href="${article.url}" target="_blank">
                 ${bannerHtml}
@@ -68,7 +59,5 @@ function displayNews(articles) {
         blogContainer.appendChild(postItem);
     });
 }
-    // Chama a função para iniciar todo o processo
     getDevToNews();
-
 });
