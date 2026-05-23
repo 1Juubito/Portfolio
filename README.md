@@ -10,7 +10,7 @@ Bem-vindo ao meu espaço na web! Este é o meu portfólio pessoal construído no
 
 ---
 
-## ✨ Funcionalidades e Destaques (O que tem de legal aqui?)
+## ✨ Funcionalidades e Destaques
 
 * **Dragão Interativo (`interactive_dragon.js`):** Porque um portfólio tradicional é muito chato. Adicionei um *easter egg* / elemento interativo para surpreender quem navega pela página!
 * **Página 404 Customizada:** Um design *monochrome* exclusivo para a página de erro, garantindo que o usuário não perca a experiência visual nem quando clica num link quebrado.
