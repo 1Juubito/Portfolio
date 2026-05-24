@@ -382,6 +382,24 @@ main {
   justify-content: center;
   align-items: center;
   padding: 0 10px;
+  position: relative;
+}
+
+.navbar-item {
+  position: static;
+}
+
+.active-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 0;
+  background-color: #ffdb70;
+  border-radius: 4px;
+  transition: transform 0.3s ease, width 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
 }
 
 .navbar-link {

@@ -388,3 +388,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     submitBtn.setAttribute("disabled", "");
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const navLinks = document.querySelectorAll('.navbar-link');
+    const indicator = document.querySelector('.active-indicator');
+
+    function moveIndicator(element) {
+        if (!element) return;
+        
+        const width = element.offsetWidth;
+        const left = element.offsetLeft;
+        
+        indicator.style.width = `${width}px`;
+        indicator.style.transform = `translateX(${left}px)`; 
+    }
+
+    const activeLink = document.querySelector('.navbar-link.active');
+    if (activeLink) {
+        setTimeout(() => moveIndicator(activeLink), 100);
+    }
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            moveIndicator(e.target);
+        });
+    });
+
+    window.addEventListener('resize', () => {
+        const activeLink = document.querySelector('.navbar-link.active');
+        moveIndicator(activeLink);
+    });
+});
