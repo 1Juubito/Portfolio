@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 1; i <= frameCount; i++) {
             const imgPath = `${folder}/frame${i}.png`;
             frames.push(imgPath);
+            
             const preloadImg = new Image();
             preloadImg.src = imgPath; 
         }
@@ -36,5 +37,17 @@ document.addEventListener("DOMContentLoaded", () => {
             customCursor.style.backgroundImage = `url('${frames[index]}')`;
             index = (index + 1) % frames.length;
         }, 2000 / fps);
+
+        const mapaGPS = document.querySelector('iframe');
+        
+        if (mapaGPS) {
+            mapaGPS.addEventListener('mouseenter', () => {
+                customCursor.style.opacity = '0'; 
+            });
+            
+            mapaGPS.addEventListener('mouseleave', () => {
+                customCursor.style.opacity = '1'; 
+            });
+        }
     }
 });
