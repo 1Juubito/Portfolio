@@ -1960,3 +1960,20 @@ textarea.form-input {
 .blog-banner-box.img-error::before {
   display: none;
 }
+
+* {
+  cursor: none !important;
+}
+
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 99999;
+  background-size: contain;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
