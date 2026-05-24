@@ -30,17 +30,21 @@ document.addEventListener("DOMContentLoaded", () => {
         const fps = 10;
 
         document.addEventListener('mousemove', (e) => {
-            customCursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            if (customCursor) {
+                customCursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            }
         });
 
         setInterval(() => {
-            customCursor.style.backgroundImage = `url('${frames[index]}')`;
-            index = (index + 1) % frames.length;
+            if (customCursor) {
+                customCursor.style.backgroundImage = `url('${frames[index]}')`;
+                index = (index + 1) % frames.length;
+            }
         }, 2000 / fps);
 
         const mapaGPS = document.querySelector('iframe');
         
-        if (mapaGPS) {
+        if (mapaGPS && customCursor) {
             mapaGPS.addEventListener('mouseenter', () => {
                 customCursor.style.opacity = '0'; 
             });
@@ -49,5 +53,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 customCursor.style.opacity = '1'; 
             });
         }
+        
+        document.addEventListener('mouseleave', () => {
+            if (customCursor) {
+                customCursor.style.opacity = '0';
+            }
+        });
+
+        document.addEventListener('mouseenter', () => {
+            if (customCursor) {
+                customCursor.style.opacity = '1';
+            }
+        });
     }
 });
