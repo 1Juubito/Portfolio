@@ -1977,3 +1977,14 @@ textarea.form-input {
   background-repeat: no-repeat;
   will-change: transform;
 }
+
+@media (hover: none) and (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+
+  #custom-cursor {
+    display: none !important;
+  }
+  
+}
