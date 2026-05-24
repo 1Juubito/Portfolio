@@ -1978,13 +1978,17 @@ textarea.form-input {
   will-change: transform;
 }
 
-@media (hover: none) and (pointer: coarse) {
-  * {
-    cursor: auto !important;
-  }
+@media (max-width: 992px) {
+    
+    * {
+        cursor: auto !important;
+    }
 
-  #custom-cursor {
-    display: none !important;
-  }
-  
+    #custom-cursor {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
 }
